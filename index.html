@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+		<link rel="stylesheet" href="styles/visas.css" />
+	</head>
+	<body>
+		<main id="visa-explorer" 
+			  ng-app="visa-sponsors" 
+			  ng-controller="ExplorerController as explorer">
+			<h1>Visa sponsors</h1>
+			<div class="controls">
+				<div class="control-row">
+					<h2>
+						<label for="search-sponsors-input">
+							Search sponsors
+						</label>
+					</h2>
+					<div class="input-clear">
+						<input ng-model="explorer.filters['name']"
+							   type="search" name="search-sponsors-input" id="search-sponsors-input"
+							   placeholder="Start typing an employer name..." />
+						<button ng-click="explorer.removeFilter('name')"
+								ng-disabled="!explorer.filters['name']"
+								class="remove-filter clear-button" title="Clear search">
+							&times;
+						</button>
+					</div>
+				</div>
+				<div class="control-row">
+					<h2>Filter sponsors</h2>
+					<div class="control-item-list sponsor-filters clearfix">
+						<div ng-repeat="(listKey, listValue) in explorer.lists"
+							 class="sponsor-filter sponsor-filter-{{listKey}} control-item">
+							<h3>
+								<label for="filterby-{{listKey}}">
+									{{explorer.humanNames[listKey]}}
+								</label>
+							</h3>
+							<div class="input-clear">
+								<select ng-model="explorer.filters[listKey]" 
+										id="filterby-{{listKey}}" name="filterby-{{listKey}}">
+									<option ng-repeat="item in listValue | orderBy">{{item}}</option>
+								</select>
+								<button ng-click="explorer.removeFilter(listKey)"
+										ng-disabled="!explorer.filters[listKey]"
+										class="remove-filter clear-button" 
+										title="Clear {{explorer.humanNames[listKey] | lowercase}} filter">
+									&times;
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="sponsors-list">
+				<div class="sponsors-list-header">
+					<div ng-switch="filteredSponsors.length"
+						 class="results-msg">
+						<span ng-switch-when="0">
+							No matching sponsors found
+						</span>
+						<span ng-switch-default>
+							Found <strong>{{filteredSponsors.length}}</strong>
+							{{filteredSponsors.length === 1 ? "sponsor" : "sponsors"}}
+						</span>
+						<button ng-click="explorer.clearAllFilters()"
+								ng-disabled="!explorer.filtersApplied()"
+								class="showAll-button">
+							Show all
+						</button>
+					</div>
+					<div class="sort-controls">
+						<label for="sortby-list">Sort by:</label>
+						<select ng-model="explorer.sort.property"
+								id="sortby-list" name="sortby-list">
+							<option value="name">Employer name</option>
+							<option ng-repeat="field in explorer.groupings.primary"
+									value="{{field}}">
+								{{explorer.humanNames[field]}}
+							</option>
+						</select>
+						<input ng-model="explorer.sort.reversed" 
+							   type="radio" name="sort-order" value="" id="sort-asc" />
+						<label for="sort-asc">A - Z</label>
+						<input ng-model="explorer.sort.reversed" 
+							   type="radio" name="sort-order" value="true" id="sort-desc"/>
+						<label for="sort-desc">Z - A</label>
+					</div>
+				</div>
+				<div ng-repeat="sponsor in explorer.sponsors | 
+								filter  : explorer.filters   |
+								orderBy : explorer.sort.property
+										: explorer.sort.reversed
+								as filteredSponsors"
+					class="sponsor-list-item">
+					<div class="sponsor">
+						<div class="sponsor-headings">
+							<h2 class="sponsor-name">
+								<a href="{{sponsor.website}}">{{sponsor.name}}</a>
+							</h2>
+							<div ng-repeat="field in explorer.groupings.primary" 
+								 ng-show="sponsor[field]"
+								 class="sponsor-{{field}} sponsor-primary">
+								<a ng-click="explorer.filterArrayBy(field, sponsor[field])"
+								   href class="filter-link"
+								   title="Show {{sponsor[field]}} organisations only">
+									{{sponsor[field]}}
+								</a>
+							</div>
+							<div class="sponsor-social-media">
+								<ul class="sponsor-social-media-list clearfix">
+									<li ng-repeat="site in explorer.groupings.socialMedia"
+										ng-show="sponsor[site]"
+										class="sponsor-social-media-list-item">
+										<a href="{{sponsor[site]}}">
+											<img ng-src="{{explorer.logos[site]}}" 
+												 class="sponsor-social-media-logo logo-{{site}}" 
+												 title="find {{sponsor.name}} on {{explorer.humanNames[site]}}" 
+												 alt="{{explorer.humanNames[site]}} logo" />
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="sponsor-categories-row">
+							<div class="sponsor-sectors sponsor-categories">
+								<ul class="sponsor-sectors-list sponsor-category-list clearfix">
+									<li ng-repeat="sector in sponsor.sectors.split('\n')"
+										class="sponsor-sectors-list-item sponsor-category-list-item">
+										<a ng-click="explorer.filterArrayBy('sectors', sector)"
+										   href class="filter-link" 
+										   title="Show {{sector | lowercase}} organisations only">
+										   {{sector}}
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="sponsor-index sponsor-categories">
+								<ul class="sponsor-index-list sponsor-category-list clearfix">
+									<li ng-repeat="index in sponsor.index.split('\n')"
+										class="sponsor-index-list-item sponsor-category-list-item">
+										<a ng-click="explorer.filterArrayBy('index', index)"
+										   href class="filter-link"
+										   title="Show {{index}} only">
+										   {{index}}
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="visa-restrictions-row">
+							<div ng-show="sponsor.visaRestrictions" 
+								 class="visa-restrictions">
+								<div class="visa-warning-icon">&#x26A0;</div>
+								<div class="visa-warning-text">
+									{{sponsor.visaRestrictions}}
+								</div>
+							</div>
+						</div>
+						<div class="sponsor-info-row">
+							<div ng-repeat="field in explorer.groupings.moreInfo"
+								 class="sponsor-info-box sponsor-{{field}}">
+								<h3 class="sponsor-info-heading">{{explorer.humanNames[field]}}</h3>
+								<div ng-switch="sponsor[field]">
+									<p ng-switch-when="">
+										<a href="{{sponsor.website}}">See website</a>
+									</p>
+									<p ng-switch-default>
+										{{sponsor[field]}}
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<!--<script src="http://www.lse.ac.uk/v4global/DynamicTemplates/JS/jquery-1-3-2.js?build=8112734"></script>-->
+		<script src="https://opensource.keycdn.com/angularjs/1.5.5/angular.min.js"></script>
+		<script src="scripts/visas.js"></script>
+	</body>
+</html>
