@@ -1,6 +1,6 @@
-(function() {
+(function(jQuery) {
 
-	var app = angular.module('visa-sponsors', []);
+	var app = angular.module('visa-sponsors', ['ngAnimate']);
 
 	app.controller('ExplorerController', function($http) {
 
@@ -89,7 +89,7 @@
 		}
 
 		explorer.sort = {property: 'name', reversed: false};
-
+		
 	});
 
-})();
+})($);

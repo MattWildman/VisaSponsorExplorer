@@ -22,14 +22,17 @@ a:hover {
 	clear: both;
 }
 
+#visa-explorer fieldset {
+	border: 0;
+}
+
 #visa-explorer h3 {
 	margin-bottom: 0.4em;
 }
 
 #visa-explorer {
 	font-family: Arial, sans-serif;
-	width: 100%;
-	max-width: 974px;
+	width: 478px;
 	margin: 0 auto;
 }
 
@@ -38,7 +41,7 @@ a:hover {
 	padding-top: 0.5em;
 }
 
-.control-row h2 {
+.control-row h2, .control-row legend {
 	font-weight: normal;
 	margin-bottom: 0.5em;
 }
@@ -56,8 +59,7 @@ a:hover {
 }
 
 #visa-explorer #search-sponsors-input {
-	max-width: 200px;
-	min-width: 50%;
+	width: 100%;
 	margin-top: 0;
 	font-size: 1.25em;
 }
@@ -69,22 +71,27 @@ a:hover {
 
 .clear-button {
 	padding: 0.2em;
-	margin-left: 0.4em;
+	margin: 0 0.4em;
 	font-size: 1.25em;
 	line-height: 0;
 	height: 25px;
 }
 
 .sponsor-filters {
+	flex-wrap: wrap;
 	justify-content: space-between;
 }
 
 .sponsor-filter {
-	width: 24%;
+	width: 50%;
 }
 
 .sponsor-filter select {
 	width: 100%;
+}
+
+.sponsor-filter h3 {
+	margin-top: 0.5em;
 }
 
 #sponsors-list {
@@ -94,14 +101,23 @@ a:hover {
 .sponsors-list-header {
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-end;
+	align-items: flex-start;
 	padding: 0.5em;
 	background-color: #ececec;
 }
 
+.results-msg {
+	width: 33%;
+}
+
+.sort-controls-container {
+	width: 67%;
+}
+
 .sort-controls {
 	display: flex;
-	align-items: center;
+	justify-content: flex-end;
+	align-items: flex-start;
 }
 
 #visa-explorer .sort-controls input {
@@ -116,73 +132,91 @@ a:hover {
 	margin-left: 0.2em;
 }
 
+.sort-order-radios {
+	margin-right: 0.5em;
+}
+
+.sort-order-radio:first-child {
+	margin-top: 0.2em;
+	margin-bottom: 0.6em;
+}
+
 .showAll-button {
-	margin-left: 0.5em;
+	margin-top: 0.4em;
 }
 
 .sponsor-list-item {
 	border-top: 2px solid #ececec;
 	padding: 0.5em;
-	margin-bottom: 0.5em;
-	padding-top: 0.5em;
+	margin-bottom: 0.75em;
+	padding-top: 1em;
 }
 
-.filter-link {
+a.filter-link {
+	display: block;
 	padding: 0.5em;
-	display: inline-block;
-	border: 1px solid #f03e4d;
+	color: #000;
+	font-weight: bold;
 	border-radius: 5px;
 	font-size: 75%;
+}
+.sponsor-location a.filter-link {
+	background-color: #92d595;
+}
+.sponsor-visaType a.filter-link {
+	background-color: #fabb80;
+}
+.sponsor-sectors a.filter-link {
+	background-color: #69c5e9;
+}
+.sponsor-index a.filter-link {
+	background-color: #bfa6d0;
+}
+.sponsor-location a.filter-link:hover {
+	background-color: #7ccc80;
+	text-decoration: none;
+}
+.sponsor-visaType a.filter-link:hover {
+	background-color: #f9ab63;
+	text-decoration: none;
+}
+.sponsor-sectors a.filter-link:hover {
+	background-color: #4db8e4;
+	text-decoration: none;
+}
+.sponsor-index a.filter-link:hover {
+	background-color: #b192c5;
+	text-decoration: none;
+}
+
+.sponsor-visaType {
+	min-width: 95px;
+}
+
+.sponsor-index {
+	min-width: 80px;
 }
 
 .sponsor-headings {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-	margin-bottom: 0.5em;
+	align-items: flex-start;
+	margin-bottom: 1em;
 }
 
 .sponsor-headings .sponsor-name {
-	flex-grow: 2;
-}
-
-.sponsor-headings .sponsor-primary {
-	margin-left: 0.5em;
-}
-
-.sponsor-categories-row {
-	display: flex;
-	justify-content: space-between;
-}
-
-.sponsor-category-list {
-	list-style: none;
-}
-
-.sponsor-category-list-item {
-	float: left;
-	margin-right: 0.5em;
-}
-
-.sponsor-index-list-item {
-	margin-right: 0;
-	margin-left: 0.5em;
+	width: 100%;
 }
 
 .sponsor-social-media-list {
+	width: 75px;
 	list-style: none;
 	margin-left: 0.5em;
 }
 
 .sponsor-social-media-list-item {
 	float: right;
+	text-align: right;
 	margin-left: 0.3em;
-}
-
-.sponsor-social-media-logo {
-	position: relative;
-	top: 2px;
 }
 
 .sponsor-social-media-logo.logo-twitter {
@@ -193,12 +227,63 @@ a:hover {
 	width: 35px;
 }
 
+.sponsor-categories-row {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.sponsor-categories {
+	flex-grow: 1;
+	border-left: 2px solid #ececec;
+	padding: 0 0.75em;
+}
+
+.sponsor-sectors {
+	padding-right: 0.2em;
+}
+
+.sponsor-categories:first-child {
+	padding-left: 0;
+	border: 0;
+}
+
+.sponsor-categories:last-child {
+	padding-right: 0;
+	margin-right: 0;
+}
+
+.sponsor-category-list {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.sponsor-category-list-item {
+	display: block;
+	flex-grow: 2;
+	margin-right: 0.6em;
+	margin-bottom: 0.5em;
+}
+
+#visa-explorer .category-list-heading {
+	margin-bottom: 0.75em;
+	font-weight: bold;
+	font-size: 95%;
+	color: #444;
+}
+
+#visa-explorer .sponsor-sectors .category-list-heading {
+	margin-right: 0.6em;
+}
+
 .visa-restrictions-row {
 	margin-top: 0.5em;
+	font-size: 90%;
 }
 
 .visa-restrictions {
 	padding: 0.5em;
+	padding-left: 0.6em;
 	background-color: #fde5ce;
 	display: block;
 }
@@ -220,21 +305,15 @@ a:hover {
 
 .sponsor-info-row {
 	margin-top: 0.5em;
-	display: flex;
-	justify-content: space-between;
+	font-size: 90%;
+	background-color: #ececec;
+	padding: 0.5em;
 }
 
 .sponsor-info-box {
-	padding: 0.5em;
-	background-color: #ececec;
-	margin-right: 0.5em;
-	flex-basis: 50%;
+	margin-bottom: 0.75em;
 }
 
 .sponsor-info-box:last-child {
-	margin-right: 0;
-}
-
-.sponsor-info-heading {
-	margin-bottom: 0.5em;
+	margin-bottom: 0;
 }
