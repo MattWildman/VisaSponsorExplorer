@@ -1,22 +1,22 @@
-h1 {
-	font-family: Arial;
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
 }
 
-body * {
+#visa-explorer * {
 	margin: 0;
 	padding: 0;
 }
 
-a, a:visited {
+#visa-explorer a, #visa-explorer a:visited {
 	color: #f03e4d;
 	text-decoration: none;
 }
 
-a:hover {
+#visa-explorer a:hover {
 	text-decoration: underline;
 }
 
-.clearfix::after {
+#visa-explorer .clearfix::after {
 	content: '';
 	display: block;
 	clear: both;
@@ -24,6 +24,10 @@ a:hover {
 
 #visa-explorer fieldset {
 	border: 0;
+}
+
+#visa-explorer label {
+  font-size: 100%;
 }
 
 #visa-explorer h3 {
@@ -36,17 +40,19 @@ a:hover {
 	margin: 0 auto;
 }
 
-.control-row {
+#visa-explorer .control-row {
 	margin-bottom: 0.5em;
 	padding-top: 0.5em;
 }
 
-.control-row h2, .control-row legend {
+#visa-explorer .control-row h2, #visa-explorer .control-row legend {
 	font-weight: normal;
 	margin-bottom: 0.5em;
 }
 
-.control-item-list {
+#visa-explorer .control-item-list {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 }
 
@@ -65,11 +71,15 @@ a:hover {
 }
 
 #visa-explorer .input-clear {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	align-items: center;
+	-webkit-box-align: center;
+		-ms-flex-align: center;
+			align-items: center;
 }
 
-.clear-button {
+#visa-explorer .clear-button {
 	padding: 0.2em;
 	margin: 0 0.4em;
 	font-size: 1.25em;
@@ -77,47 +87,96 @@ a:hover {
 	height: 25px;
 }
 
-.sponsor-filters {
-	flex-wrap: wrap;
-	justify-content: space-between;
+#visa-explorer .sponsor-filters {
+	-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+	-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
+			justify-content: space-between;
 }
 
-.sponsor-filter {
+#visa-explorer .sponsor-filter {
 	width: 50%;
 }
 
-.sponsor-filter select {
+#visa-explorer .sponsor-filter select {
 	width: 100%;
 }
 
-.sponsor-filter h3 {
+#visa-explorer .sponsor-filter h3 {
 	margin-top: 0.5em;
 }
 
 #sponsors-list {
+	display: none;
 	margin-top: 1em;
 }
 
-.sponsors-list-header {
+#visa-explorer #sponsors-loading-mask {
+	width: 100%;
+	background-color: white;
+	z-index: 9999;
+	height: 100%;
+	text-align: center;
+}
+
+#visa-explorer #sponsors-loading-mask::after {
+	content: ' ';
+	position: relative;
+	display: block;
+	margin: 2em auto;
+	height: 2em;
+	width: 2em;
+	animation: rotate 0.8s infinite linear;
+	border: 8px solid #4db8e4;
+	border-right-color: transparent;
+	border-radius: 50%;
+}
+
+@keyframes rotate {
+  0%    { transform: rotate(0deg); }
+  100%  { transform: rotate(360deg); }
+}
+
+#visa-explorer .sponsors-loading-msg {
+	margin-top: 1.5em;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #4db8e4;
+}
+
+#visa-explorer .sponsors-list-header {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
+	-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
+			justify-content: space-between;
+	-webkit-box-align: start;
+		-ms-flex-align: start;
+			align-items: flex-start;
 	padding: 0.5em;
 	background-color: #ececec;
 }
 
-.results-msg {
+#visa-explorer .results-msg {
 	width: 33%;
 }
 
-.sort-controls-container {
+#visa-explorer .sort-controls-container {
 	width: 67%;
 }
 
-.sort-controls {
+#visa-explorer .sort-controls {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: flex-end;
-	align-items: flex-start;
+	-webkit-box-pack: end;
+		-ms-flex-pack: end;
+			justify-content: flex-end;
+	-webkit-box-align: start;
+		-ms-flex-align: start;
+			align-items: flex-start;
 }
 
 #visa-explorer .sort-controls input {
@@ -132,137 +191,162 @@ a:hover {
 	margin-left: 0.2em;
 }
 
-.sort-order-radios {
+#visa-explorer .sort-order-radios {
 	margin-right: 0.5em;
 }
 
-.sort-order-radio:first-child {
+#visa-explorer .sort-order-radio:first-child {
 	margin-top: 0.2em;
 	margin-bottom: 0.6em;
 }
 
-.showAll-button {
+#visa-explorer .showAll-button {
 	margin-top: 0.4em;
 }
 
-.sponsor-list-item {
+#visa-explorer .sponsor-list-item {
 	border-top: 2px solid #ececec;
-	padding: 0.5em;
 	margin-bottom: 0.75em;
 	padding-top: 1em;
 }
 
-a.filter-link {
+#visa-explorer a.filter-link {
 	display: block;
 	padding: 0.5em;
 	color: #000;
 	font-weight: bold;
 	border-radius: 5px;
 	font-size: 75%;
+	cursor: pointer;
 }
-.sponsor-location a.filter-link {
+#visa-explorer a.filter-link:visited {
+	color: #000;
+}
+#visa-explorer .sponsor-location a.filter-link {
 	background-color: #92d595;
 }
-.sponsor-visaType a.filter-link {
+#visa-explorer .sponsor-visaType a.filter-link {
 	background-color: #fabb80;
 }
-.sponsor-sectors a.filter-link {
+#visa-explorer .sponsor-sectors a.filter-link {
 	background-color: #69c5e9;
 }
-.sponsor-index a.filter-link {
+#visa-explorer .sponsor-index a.filter-link {
 	background-color: #bfa6d0;
 }
-.sponsor-location a.filter-link:hover {
+#visa-explorer .sponsor-location a.filter-link:hover {
 	background-color: #7ccc80;
 	text-decoration: none;
 }
-.sponsor-visaType a.filter-link:hover {
+#visa-explorer .sponsor-visaType a.filter-link:hover {
 	background-color: #f9ab63;
 	text-decoration: none;
 }
-.sponsor-sectors a.filter-link:hover {
+#visa-explorer .sponsor-sectors a.filter-link:hover {
 	background-color: #4db8e4;
 	text-decoration: none;
 }
-.sponsor-index a.filter-link:hover {
+#visa-explorer .sponsor-index a.filter-link:hover {
 	background-color: #b192c5;
 	text-decoration: none;
 }
 
-.sponsor-visaType {
+#visa-explorer .sponsor-visaType {
 	min-width: 95px;
 }
 
-.sponsor-index {
+#visa-explorer .sponsor-index {
 	min-width: 80px;
 }
 
-.sponsor-headings {
+#visa-explorer .sponsor-headings {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	align-items: flex-start;
+	-webkit-box-align: start;
+		-ms-flex-align: start;
+			align-items: flex-start;
 	margin-bottom: 1em;
 }
 
-.sponsor-headings .sponsor-name {
+#visa-explorer .sponsor-headings .sponsor-name {
 	width: 100%;
+	font-weight: bold;
 }
 
-.sponsor-social-media-list {
+#visa-explorer .sponsor-social-media-list {
 	width: 75px;
 	list-style: none;
 	margin-left: 0.5em;
 }
 
-.sponsor-social-media-list-item {
+#visa-explorer .sponsor-social-media-list-item {
 	float: right;
 	text-align: right;
 	margin-left: 0.3em;
 }
 
-.sponsor-social-media-logo.logo-twitter {
+#visa-explorer .sponsor-social-media-logo.logo-twitter {
 	width: 30px;
 }
 
-.sponsor-social-media-logo.logo-linkedin {
-	width: 35px;
+#visa-explorer .sponsor-social-media-logo.logo-linkedin {
+	width: 35.5px;
 }
 
-.sponsor-categories-row {
+#visa-explorer .sponsor-categories-row {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: flex-start;
+	-webkit-box-pack: start;
+		-ms-flex-pack: start;
+			justify-content: flex-start;
 }
 
-.sponsor-categories {
-	flex-grow: 1;
+#visa-explorer .sponsor-categories {
+	-webkit-box-flex: 1;
+		-ms-flex-positive: 1;
+			flex-grow: 1;
 	border-left: 2px solid #ececec;
 	padding: 0 0.75em;
 }
 
-.sponsor-sectors {
+#visa-explorer .sponsor-sectors {
 	padding-right: 0.2em;
+	min-width: 120px;
 }
 
-.sponsor-categories:first-child {
+#visa-explorer .sponsor-categories:first-child {
 	padding-left: 0;
 	border: 0;
 }
 
-.sponsor-categories:last-child {
+#visa-explorer .sponsor-categories:last-child {
 	padding-right: 0;
 	margin-right: 0;
 }
 
-.sponsor-category-list {
+#visa-explorer .sponsor-category-list {
 	list-style: none;
+	font-size: 100%;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
 }
 
-.sponsor-category-list-item {
+#visa-explorer .sponsor-category-list-item {
 	display: block;
-	flex-grow: 2;
+	-webkit-box-flex: 2;
+		-ms-flex-positive: 2;
+			flex-grow: 2;
 	margin-right: 0.6em;
 	margin-bottom: 0.5em;
+}
+
+#visa-explorer .sponsor-index-list-item {
+	margin-right: 0;
 }
 
 #visa-explorer .category-list-heading {
@@ -276,24 +360,24 @@ a.filter-link {
 	margin-right: 0.6em;
 }
 
-.visa-restrictions-row {
+#visa-explorer .visa-restrictions-row {
 	margin-top: 0.5em;
 	font-size: 90%;
 }
 
-.visa-restrictions {
+#visa-explorer .visa-restrictions {
 	padding: 0.5em;
 	padding-left: 0.6em;
 	background-color: #fde5ce;
 	display: block;
 }
 
-.visa-warning-text {
+#visa-explorer .visa-warning-text {
 	display: table-cell;
 	vertical-align: middle;
 }
 
-.visa-warning-icon {
+#visa-explorer .visa-warning-icon {
 	color: #f9ab63;
 	font-size: 125%;
 	padding-right: 0.5em;
@@ -303,17 +387,16 @@ a.filter-link {
 	vertical-align: middle;
 }
 
-.sponsor-info-row {
+#visa-explorer .sponsor-info-row {
 	margin-top: 0.5em;
-	font-size: 90%;
 	background-color: #ececec;
 	padding: 0.5em;
 }
 
-.sponsor-info-box {
+#visa-explorer .sponsor-info-box {
 	margin-bottom: 0.75em;
 }
 
-.sponsor-info-box:last-child {
+#visa-explorer .sponsor-info-box:last-child {
 	margin-bottom: 0;
 }
